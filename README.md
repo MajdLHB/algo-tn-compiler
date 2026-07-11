@@ -45,15 +45,18 @@ python algotn.py fichier.algo --no-run   # transpile sans exécuter
 
 | Pseudocode | Python généré |
 |---|---|
-| `écrire("Bonjour", x)` | `print("Bonjour", x, sep="")` |
-| `lire(x)` | lecture **typée selon le TDO** (`x : entier` → `int(input())`, avec re-saisie si valeur invalide) |
+| `écrire("Bonjour", x)` (alias `afficher`) | `print("Bonjour", x, sep="")` |
+| `lire(x)` (alias `saisir`) | lecture **typée selon le TDO** (`x : entier` → `int(input())`, avec re-saisie si valeur invalide ; `caractère` = exactement 1 caractère) |
+| **tableaux de déclaration dessinés** (TDO / TDOG / TDOL) | lus où qu'ils soient dans le fichier ; un type non défini (ex : `entierr`) est une **erreur claire** |
+| `fonction premier(n : entier) : booléen … retourner …` | `def premier(n): … return …` |
+| `procédure permut(@x, @y : entier)` | passage par variable émulé : `x, y = permut(x, y)` |
 | `x ← 5` (ou `x <- 5`) | `x = 5` |
 | `si … alors / sinon si / sinon / fin_si` | `if / elif / else` |
-| `pour i de 1 à n [pas p] faire … fin_pour` | `for i in range(1, n + 1)` |
+| `pour i de 1 à n [pas p] faire … fin_pour` | `for i in range(1, n + 1)` — la borne finale est **atteinte** |
 | `tant que … faire … fin_tant_que` | `while …:` |
 | `répéter … jusqu'à cond` | `while True: … if cond: break` |
 | `selon x … autres … fin_selon` | `match / case` |
-| `t : tableau de 10 entier` | tableau indexé **de 1 à n** comme en cours |
+| `t : tableau de 10 entier` (ou via TDNT) | tableau indexé **de 1 à n** comme en cours |
 | `=  ≠  ≤  ≥  ∈` | `==  !=  <=  >=  in` |
 | `et  ou  non  ouex` | `and  or  not  ^` |
 | `div  mod  vrai  faux` | `//  %  True  False` |
@@ -78,14 +81,23 @@ t : tableau de 10 réel   // lire(t[i]) →  t[i] = float(input())
 
 ## Pas encore supporté
 
-- `fonction` / `procédure` définies par l'utilisateur
 - `enregistrement` (TDNT), fichiers texte et fichiers typés
 - Les contributions sont les bienvenues !
 
 ## Exemples
 
-Voir [`exemple.algo`](exemple.algo) (syntaxe de l'extension, accentuée) et
-[`exemple2.algo`](exemple2.algo) (syntaxe classique `Ecrire`/`FinSi`).
+Voir [`exemple.algo`](exemple.algo) (syntaxe de l'extension, accentuée),
+[`exemple2.algo`](exemple2.algo) (syntaxe classique `Ecrire`/`FinSi`) et
+[`exemple3.algo`](exemple3.algo) (fonctions, procédure avec `@`, TDOG/TDOL dessinés).
+
+## Intégration VSCode
+
+Deux PR ajoutent à l'extension `algorithme-tn` un bouton **▶ Exécuter**
+([PR #7](https://github.com/romoez/algo-tn-vscode/pull/7)) et un **éditeur de
+tableaux de déclaration** dans un onglet
+([PR #8](https://github.com/romoez/algo-tn-vscode/pull/8)) — voir
+[MajdLHB/algo-tn-vscode](https://github.com/MajdLHB/algo-tn-vscode) pour la
+version empaquetée (`.vsix`).
 
 ## Licence
 
